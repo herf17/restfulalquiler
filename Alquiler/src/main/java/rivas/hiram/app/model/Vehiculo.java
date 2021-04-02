@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name ="COCHES")
+@Table(name ="vehiculos")
 public class Vehiculo {
 	@Column(name = "matricula")
 	@Id
@@ -21,17 +21,32 @@ public class Vehiculo {
 	private String color;
 	@Column
 	private String km;
+	@Column
+	private boolean activo;
+	@Column
+	private String ano;
+	@Column
+	private String precio;
 	
 	public Vehiculo() {}
 
-	public Vehiculo(String matricula, String estado, String marca, String modelo, String color, String km) {
+	
+
+	public Vehiculo(String matricula, String estado, String marca, String modelo, String color, String km,
+			boolean activo, String ano, String precio) {
+		super();
 		this.matricula = matricula;
 		this.estado = estado;
 		this.marca = marca;
 		this.modelo = modelo;
 		this.color = color;
 		this.km = km;
+		this.activo = activo;
+		this.ano = ano;
+		this.precio = precio;
 	}
+
+
 
 	public String getMatricula() {
 		return matricula;
@@ -79,6 +94,47 @@ public class Vehiculo {
 
 	public void setKm(String km) {
 		this.km = km;
+	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
+
+
+
+	public String getAno() {
+		return ano;
+	}
+
+
+
+	public void setAno(String ano) {
+		this.ano = ano;
+	}
+
+
+
+	public String getPrecio() {
+		return precio;
+	}
+
+
+
+	public void setPrecio(String precio) {
+		this.precio = precio;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Vehiculo [matricula=" + matricula + ", estado=" + estado + ", marca=" + marca + ", modelo=" + modelo
+				+ ", color=" + color + ", km=" + km + ", activo=" + activo + ", ano=" + ano + ", precio=" + precio
+				+ "]";
 	}
 	
 	
