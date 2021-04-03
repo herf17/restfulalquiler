@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import rivas.hiram.app.model.Vehiculo;
 import rivas.hiram.app.repository.VehiculoRepository;
+import rivas.hiram.app.services.VehiculosDispoServices;
 
 @RestController
 public class AlquilerController {
@@ -15,8 +16,12 @@ public class AlquilerController {
 	@Autowired
 	private VehiculoRepository vehiculo;
 	
+	@Autowired
+	private VehiculosDispoServices vehiculoDispoServices;
+	
 	@GetMapping("/todo")
 	public List<Vehiculo> todosVehiculo(){
-		return vehiculo.findAll();	}
+		return vehiculoDispoServices.getdisponible();	
+	}
 
 }

@@ -1,10 +1,32 @@
 package rivas.hiram.app.model;
 
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
 import javax.persistence.Entity;
+import javax.persistence.EntityResult;
+import javax.persistence.FieldResult;
 import javax.persistence.Id;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 
+@NamedStoredProcedureQuery(
+		name = "AutosDisponibles",
+		procedureName = "autosDisponi",
+		resultSetMappings = "AutosDispon"
+		)
+@SqlResultSetMapping(
+		name ="AutosDispon",
+		columns = {
+				@ColumnResult(name="matricula"),
+				@ColumnResult(name="marca"),
+				@ColumnResult(name="modelo"),
+				@ColumnResult(name="color"),
+				@ColumnResult(name="ano"),
+				@ColumnResult(name="km"),
+				@ColumnResult(name="precio")
+		}
+		)
 @Entity
 @Table(name ="vehiculos")
 public class Vehiculo {
@@ -15,6 +37,8 @@ public class Vehiculo {
 	private String estado;
 	@Column
 	private String marca;
+	@Column 
+	private boolean activo;
 	@Column
 	private String modelo;
 	@Column
@@ -22,29 +46,35 @@ public class Vehiculo {
 	@Column
 	private String km;
 	@Column
-	private boolean activo;
-	@Column
 	private String ano;
 	@Column
 	private String precio;
 	
 	public Vehiculo() {}
 
-	
-
-	public Vehiculo(String matricula, String estado, String marca, String modelo, String color, String km,
-			boolean activo, String ano, String precio) {
+	public Vehiculo(String matricula, String estado, String marca, boolean activo, String modelo, String color,
+			String km, String ano, String precio) {
 		super();
 		this.matricula = matricula;
 		this.estado = estado;
 		this.marca = marca;
+		this.activo = activo;
 		this.modelo = modelo;
 		this.color = color;
 		this.km = km;
-		this.activo = activo;
 		this.ano = ano;
 		this.precio = precio;
 	}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -96,14 +126,6 @@ public class Vehiculo {
 		this.km = km;
 	}
 
-	public boolean isActivo() {
-		return activo;
-	}
-
-	public void setActivo(boolean activo) {
-		this.activo = activo;
-	}
-
 
 
 	public String getAno() {
@@ -128,14 +150,15 @@ public class Vehiculo {
 		this.precio = precio;
 	}
 
-
-
-	@Override
-	public String toString() {
-		return "Vehiculo [matricula=" + matricula + ", estado=" + estado + ", marca=" + marca + ", modelo=" + modelo
-				+ ", color=" + color + ", km=" + km + ", activo=" + activo + ", ano=" + ano + ", precio=" + precio
-				+ "]";
+	public boolean isActivo() {
+		return activo;
 	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
+
+	
 	
 	
 	
