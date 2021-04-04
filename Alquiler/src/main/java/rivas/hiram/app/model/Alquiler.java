@@ -52,6 +52,18 @@ public class Alquiler {
 	public Alquiler() {
 		
 	}
+	
+	
+
+	public Alquiler(Date fecha, Usuarios usuarios, java.util.Date fecha_ini, java.util.Date fecha_fin) {
+		this.fecha = fecha;
+		this.estado = true;
+		this.usuarios = usuarios;
+		this.fecha_ini = fecha_ini;
+		this.fecha_fin = fecha_fin;
+	}
+
+
 
 	public Long getId() {
 		return id;

@@ -21,6 +21,8 @@ import rivas.hiram.app.model.Usuarios;
 import rivas.hiram.app.model.Vehiculo;
 import rivas.hiram.app.repository.UsuariosRepository;
 import rivas.hiram.app.repository.VehiculoRepository;
+import rivas.hiram.app.services.CrearOrdenServices;
+import rivas.hiram.app.services.UsuariosDetailsImpl;
 import rivas.hiram.app.services.VehiculosDispoServices;
 
 @RestController
@@ -29,6 +31,9 @@ public class AlquilerController {
 	AuthenticationManager autenticador;
 	@Autowired
 	private VehiculoRepository vehiculo;
+	
+	@Autowired
+	private CrearOrdenServices crearOrdenServices;
 	
 	@Autowired
 	private UsuariosRepository usuarioRepository;
@@ -49,10 +54,9 @@ public class AlquilerController {
 		
 		Authentication autentica = autenticador.authenticate(new UsernamePasswordAuthenticationToken(oar.getUsername(),oar.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(autentica);
-		
-		UserDetails user = (UserDetails) autentica.getPrincipal();
-		System.out.println("user: "+user.getUsername());
-		System.out.println("autoridad "+user.getAuthorities().toString());
+		Usuarios user = (Usuarios) autentica.getPrincipal();
+		//int i = crearOrdenServices.insertarOrden(oar.getFecha_ini(), oar.getFecha_fin(), oar.get, user);
+	
 		return oar;
 		
 		
