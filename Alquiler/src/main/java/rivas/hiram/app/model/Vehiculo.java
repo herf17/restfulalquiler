@@ -1,11 +1,19 @@
 package rivas.hiram.app.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ColumnResult;
 import javax.persistence.Entity;
 import javax.persistence.EntityResult;
+import javax.persistence.FetchType;
 import javax.persistence.FieldResult;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedStoredProcedureQuery;
 import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
@@ -50,6 +58,14 @@ public class Vehiculo {
 	@Column
 	private String precio;
 	
+	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+	@JoinTable(
+			name = "alquleresDeAutos",
+			joinColumns = 
+		{ @JoinColumn(name = "matricula")},
+		inverseJoinColumns = {@JoinColumn(name = "alquiler_id")})
+	private Set<Alquiler> alquileres = new HashSet<>();
+	
 	public Vehiculo() {}
 
 	public Vehiculo(String matricula, String estado, String marca, boolean activo, String modelo, String color,
@@ -65,18 +81,12 @@ public class Vehiculo {
 		this.ano = ano;
 		this.precio = precio;
 	}
+	
+	
 
-
-
-
-
-
-
-
-
-
-
-
+	public Set<Alquiler> getAlquileres() {
+		return alquileres;
+	}
 
 	public String getMatricula() {
 		return matricula;
@@ -157,6 +167,8 @@ public class Vehiculo {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
+	
+	
 
 	
 	
