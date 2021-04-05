@@ -46,8 +46,9 @@ public class Alquiler {
 	@Temporal(TemporalType.DATE)
 	private java.util.Date fecha_fin;
 	
-	@ManyToMany(mappedBy = "alquileres", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-	private Set<Vehiculo> vehiculos = new HashSet<>();
+	@ManyToOne
+	@JoinColumn(name = "Vehiculo_id", referencedColumnName = "matricula")
+	private Vehiculo vehiculos;
 	
 	public Alquiler() {
 		
@@ -109,9 +110,27 @@ public class Alquiler {
 		return usuarios;
 	}
 
-	public Set<Vehiculo> getVehiculos() {
+
+
+	public Vehiculo getVehiculos() {
 		return vehiculos;
 	}
+
+
+
+	public void setUsuarios(Usuarios usuarios) {
+		this.usuarios = usuarios;
+	}
+
+
+
+	public void setVehiculos(Vehiculo vehiculos) {
+		this.vehiculos = vehiculos;
+	}
+	
+	
+	
+	
 	
 	
 }

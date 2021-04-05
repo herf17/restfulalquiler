@@ -54,8 +54,8 @@ public class AlquilerController {
 		
 		Authentication autentica = autenticador.authenticate(new UsernamePasswordAuthenticationToken(oar.getUsername(),oar.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(autentica);
-		Usuarios user = (Usuarios) autentica.getPrincipal();
-		//int i = crearOrdenServices.insertarOrden(oar.getFecha_ini(), oar.getFecha_fin(), oar.get, user);
+		UsuariosDetailsImpl user = (UsuariosDetailsImpl) autentica.getPrincipal();
+		int i = crearOrdenServices.insertarOrden(oar.getFecha_ini(), oar.getFecha_fin(), oar.getAutos(), user.getUsername());
 	
 		return oar;
 		

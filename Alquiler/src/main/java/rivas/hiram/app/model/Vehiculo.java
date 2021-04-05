@@ -58,19 +58,12 @@ public class Vehiculo {
 	@Column
 	private String precio;
 	
-	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
-	@JoinTable(
-			name = "alquleresDeAutos",
-			joinColumns = 
-		{ @JoinColumn(name = "matricula")},
-		inverseJoinColumns = {@JoinColumn(name = "alquiler_id")})
-	private Set<Alquiler> alquileres = new HashSet<>();
+	
 	
 	public Vehiculo() {}
 
 	public Vehiculo(String matricula, String estado, String marca, boolean activo, String modelo, String color,
 			String km, String ano, String precio) {
-		super();
 		this.matricula = matricula;
 		this.estado = estado;
 		this.marca = marca;
@@ -82,11 +75,6 @@ public class Vehiculo {
 		this.precio = precio;
 	}
 	
-	
-
-	public Set<Alquiler> getAlquileres() {
-		return alquileres;
-	}
 
 	public String getMatricula() {
 		return matricula;

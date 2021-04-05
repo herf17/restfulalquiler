@@ -1,7 +1,6 @@
 package rivas.hiram.app.model;
 
 import java.util.Date;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -17,7 +16,7 @@ public class OrdenAlqulerRequest {
 	
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date fecha_fin;
-	private String [] autos;
+	private String autos;
 	
 	
 	public OrdenAlqulerRequest() {}
@@ -99,15 +98,20 @@ public class OrdenAlqulerRequest {
 
 
 
-	public String [] getAutos() {
+	public String getAutos() {
 		return autos;
 	}
 
 
 
-	public void setAutos(String [] autos) {
+
+
+
+	public void setAutos(String autos) {
 		this.autos = autos;
 	}
+	
+	
 	
 
 }
