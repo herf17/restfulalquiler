@@ -1,18 +1,15 @@
 package rivas.hiram.app.model;
 
 import java.sql.Date;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -26,6 +23,7 @@ public class Alquiler {
 	@Id
     @Column(name = "alquiler_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@Generated(GenerationTime.INSERT)
     private Long id;
 	
 	@Column(name="fecha_alquiler")

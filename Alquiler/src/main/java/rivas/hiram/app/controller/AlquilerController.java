@@ -2,13 +2,14 @@ package rivas.hiram.app.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +21,6 @@ import rivas.hiram.app.model.RegistroRequest;
 import rivas.hiram.app.model.Usuarios;
 import rivas.hiram.app.model.Vehiculo;
 import rivas.hiram.app.repository.UsuariosRepository;
-import rivas.hiram.app.repository.VehiculoRepository;
 import rivas.hiram.app.services.CrearOrdenServices;
 import rivas.hiram.app.services.UsuariosDetailsImpl;
 import rivas.hiram.app.services.VehiculosDispoServices;
@@ -29,8 +29,6 @@ import rivas.hiram.app.services.VehiculosDispoServices;
 public class AlquilerController {
 	@Autowired
 	AuthenticationManager autenticador;
-	@Autowired
-	private VehiculoRepository vehiculo;
 	
 	@Autowired
 	private CrearOrdenServices crearOrdenServices;
@@ -49,8 +47,8 @@ public class AlquilerController {
 		return vehiculoDispoServices.getdisponible();	
 	}
 	
-	@PostMapping("/cuenta")
-	public OrdenAlqulerRequest CrearOrdenAlquiler(@RequestBody OrdenAlqulerRequest oar) {
+	@PostMapping("/crearorden")
+	public OrdenAlqulerRequest CrearOrdenAlquiler(@Valid @RequestBody OrdenAlqulerRequest oar) {
 		
 		Authentication autentica = autenticador.authenticate(new UsernamePasswordAuthenticationToken(oar.getUsername(),oar.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(autentica);
@@ -62,12 +60,18 @@ public class AlquilerController {
 		
 	}
 	
-	/*@PostMapping("/cuenta")
-	public ResponseEntity<?> CrearOrdenAlquiler(@RequestBody RegistroRequest reg) {
+	@PostMapping("/registrar")
+	public ResponseEntity<?> CrearOrdenAlquiler(@Valid @RequestBody RegistroRequest reg) {
+		if (usuarioRepository.existsByUsername(reg.getUsername())) {
+			return ResponseEntity.badRequest()
+		            .body("Username no disponible");
+		}
+		
+		
 		Usuarios user = new Usuarios(reg.getUsername(),contr.encode(reg.getPassword()));
 		usuarioRepository.save(user);
 		return ResponseEntity.ok("cuenta creada");
 		
-	}*/
+	}
 
 }

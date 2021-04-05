@@ -5,11 +5,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.StoredProcedureQuery;
 
 import org.springframework.stereotype.Repository;
 
-import rivas.hiram.app.model.AutosDisponibles;
 import rivas.hiram.app.model.Vehiculo;
 
 @Repository

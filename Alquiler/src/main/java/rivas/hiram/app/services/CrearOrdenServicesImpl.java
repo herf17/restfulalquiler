@@ -1,14 +1,11 @@
 package rivas.hiram.app.services;
 
 import java.sql.Date;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import rivas.hiram.app.dao.CrearOrdenDAO;
 import rivas.hiram.app.model.Alquiler;
-import rivas.hiram.app.model.OrdenAlqulerRequest;
 import rivas.hiram.app.model.Usuarios;
 import rivas.hiram.app.model.Vehiculo;
 import rivas.hiram.app.repository.AlquilerRepository;
@@ -23,8 +20,6 @@ public class CrearOrdenServicesImpl implements CrearOrdenServices {
 	@Autowired
 	private VehiculoRepository vehiculoRepository;
 	
-	@Autowired
-	private CrearOrdenDAO nuevaOrden;
 	
 	@Autowired
 	private UsuariosRepository userrepo;
