@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import rivas.hiram.app.model.Alquiler;
 import rivas.hiram.app.model.OrdenAlqulerRequest;
 import rivas.hiram.app.model.RegistroRequest;
 import rivas.hiram.app.model.Usuarios;
@@ -48,16 +49,12 @@ public class AlquilerController {
 	}
 	
 	@PostMapping("/crearorden")
-	public OrdenAlqulerRequest CrearOrdenAlquiler(@Valid @RequestBody OrdenAlqulerRequest oar) {
+	public Alquiler CrearOrdenAlquiler(@Valid @RequestBody OrdenAlqulerRequest oar) {
 		
 		Authentication autentica = autenticador.authenticate(new UsernamePasswordAuthenticationToken(oar.getUsername(),oar.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(autentica);
 		UsuariosDetailsImpl user = (UsuariosDetailsImpl) autentica.getPrincipal();
-		int i = crearOrdenServices.insertarOrden(oar.getFecha_ini(), oar.getFecha_fin(), oar.getAutos(), user.getUsername());
-	
-		return oar;
-		
-		
+		return crearOrdenServices.insertarOrden(oar.getFecha_ini(), oar.getFecha_fin(), oar.getAutos(), user.getUsername());
 	}
 	
 	@PostMapping("/registrar")

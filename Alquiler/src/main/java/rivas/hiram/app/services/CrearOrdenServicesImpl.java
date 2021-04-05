@@ -29,17 +29,14 @@ public class CrearOrdenServicesImpl implements CrearOrdenServices {
 	
 
 	@Override
-	public int insertarOrden(java.util.Date fechini, java.util.Date fechfin, String idvehiculo, String user) {
-		int idAlquiler =0;
+	public  Alquiler insertarOrden(java.util.Date fechini, java.util.Date fechfin, String idvehiculo, String user) {
 		Usuarios userr = userrepo.findByUsername(user);
 		long milis = System.currentTimeMillis();
 		Date date = new Date(milis);
 		Optional <Vehiculo> vehiculo = vehiculoRepository.findById(idvehiculo);
 		Alquiler alquiler = new Alquiler(date,userr,fechini,fechfin);
 		alquiler.setVehiculos(vehiculo.get());
-		alquilerRepository.save(alquiler);
-		//nuevaOrden.crearOrdenNueva(alquiler);
-		return 0;
+		return alquilerRepository.save(alquiler);
 	}
 	
 	
