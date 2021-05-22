@@ -5,9 +5,11 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.StoredProcedureQuery;
 
 import org.springframework.stereotype.Repository;
 
+import rivas.hiram.app.model.AutosDisponibles;
 import rivas.hiram.app.model.Vehiculo;
 
 @Repository
@@ -17,9 +19,16 @@ public class VehiculosDispoDAOImpl implements VehiculosDispoDAO {
 
 
 	@Override
-	public List<Vehiculo> getDisponibles() {
+	public List<AutosDisponibles> getDisponibles() {
 		
-		List<Vehiculo> resultado = Collections.checkedList(entityManager.createNamedStoredProcedureQuery("AutosDisponibles").getResultList(), Vehiculo.class);
+		@SuppressWarnings("unchecked")
+		List<AutosDisponibles> resultado = entityManager.createNamedStoredProcedureQuery("AutosDisponibles").getResultList();
+		/*for(int i = 0; i<resultado.size();i++)
+			System.out.println(resultado.get(i).getMarca());*/
+		
+		
+		/*StoredProcedureQuery query = entityManager.createStoredProcedureQuery("AutosDisponibles", "AutosDispon");
+		List<AutosDisponibles> autos= query.getResultList();*/
 		return resultado;
 	}
 

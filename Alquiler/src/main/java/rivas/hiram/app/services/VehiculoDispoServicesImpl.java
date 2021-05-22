@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import rivas.hiram.app.dao.VehiculosDispoDAO;
+import rivas.hiram.app.model.AutosDisponibles;
 import rivas.hiram.app.model.Vehiculo;
 
 @Service
@@ -17,7 +18,7 @@ public class VehiculoDispoServicesImpl implements VehiculosDispoServices {
 	
 	@Override
 	@Transactional
-	public List<Vehiculo> getdisponible() {
+	public List<AutosDisponibles> getdisponible() {
 		return vehiculoDAO.getDisponibles();
 	}
 	

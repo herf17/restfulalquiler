@@ -25,15 +25,17 @@ import javax.persistence.Table;
 		)
 @SqlResultSetMapping(
 		name ="AutosDispon",
-		columns = {
-				@ColumnResult(name="matricula"),
-				@ColumnResult(name="marca"),
-				@ColumnResult(name="modelo"),
-				@ColumnResult(name="color"),
-				@ColumnResult(name="ano"),
-				@ColumnResult(name="km"),
-				@ColumnResult(name="precio")
-		}
+		entities = @EntityResult(
+				entityClass = AutosDisponibles.class,
+				fields = {
+						@FieldResult(name ="matricula", column ="matricula"),
+						@FieldResult(name ="marca", column ="marca"),
+						@FieldResult(name ="modelo", column ="modelo"),
+						@FieldResult(name ="color", column ="color"),
+						@FieldResult(name ="ano", column ="ano"),
+						@FieldResult(name ="km", column ="km"),
+						@FieldResult(name ="precio", column ="precio")
+				})
 		)
 @Entity
 @Table(name ="vehiculos")

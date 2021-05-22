@@ -1,7 +1,14 @@
 package rivas.hiram.app.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import org.hibernate.annotations.Immutable;
+
+@Entity
+@Immutable
 public class AutosDisponibles {
-	
+	@Id
 	private String matricula;
 	
 	private String marca;
@@ -14,7 +21,6 @@ public class AutosDisponibles {
 	public AutosDisponibles(){}
 	public AutosDisponibles(String matricula, String marca, String modelo, String color, String ano, String km,
 			String precio) {
-		super();
 		this.matricula = matricula;
 		this.marca = marca;
 		this.modelo = modelo;

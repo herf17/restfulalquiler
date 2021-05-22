@@ -11,16 +11,17 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import rivas.hiram.app.model.Alquiler;
+import rivas.hiram.app.model.AutosDisponibles;
 import rivas.hiram.app.model.OrdenAlqulerRequest;
 import rivas.hiram.app.model.RegistroRequest;
 import rivas.hiram.app.model.Usuarios;
-import rivas.hiram.app.model.Vehiculo;
 import rivas.hiram.app.repository.UsuariosRepository;
 import rivas.hiram.app.services.CrearOrdenServices;
 import rivas.hiram.app.services.UsuariosDetailsImpl;
@@ -43,8 +44,9 @@ public class AlquilerController {
 	@Autowired
 	PasswordEncoder contr;
 	
+	@CrossOrigin
 	@GetMapping("/todo")
-	public List<Vehiculo> todosVehiculo(){
+	public List<AutosDisponibles> todosVehiculo(){
 		return vehiculoDispoServices.getdisponible();	
 	}
 	
@@ -58,7 +60,7 @@ public class AlquilerController {
 	}
 	
 	@PostMapping("/registrar")
-	public ResponseEntity<?> CrearOrdenAlquiler(@Valid @RequestBody RegistroRequest reg) {
+	public ResponseEntity<?> Registro(@Valid @RequestBody RegistroRequest reg) {
 		if (usuarioRepository.existsByUsername(reg.getUsername())) {
 			return ResponseEntity.badRequest()
 		            .body("Username no disponible");
